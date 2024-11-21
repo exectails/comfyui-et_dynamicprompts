@@ -1,0 +1,1 @@
+dynamicprompts==0.30.2
