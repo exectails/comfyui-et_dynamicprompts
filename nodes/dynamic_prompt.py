@@ -1,8 +1,6 @@
 import random
 from dynamicprompts.generators import RandomPromptGenerator, CombinatorialPromptGenerator
 
-CATEGORY_NAME = "exectails"
-
 
 class ETDynamicPrompt:
     """
@@ -24,7 +22,7 @@ class ETDynamicPrompt:
     RETURN_NAMES = ("text", "seed", "count",)
     OUTPUT_IS_LIST = (True, True, False,)
 
-    CATEGORY = CATEGORY_NAME
+    CATEGORY = "exectails"
     FUNCTION = "process"
 
     def process(self, text: str, count: int, gen_type: str, seed_type: str, seed: int) -> tuple:
@@ -49,12 +47,3 @@ class ETDynamicPrompt:
             seeds = [random.randint(0, 2000000000) for i in range(len(prompts))]
 
         return (prompts, seeds, len(prompts),)
-
-
-NODE_CLASS_MAPPINGS = {
-    "ETDynamicPrompt": ETDynamicPrompt,
-}
-
-NODE_DISPLAY_NAME_MAPPINGS = {
-    "ETDynamicPrompt": "Dynamic Prompt",
-}
