@@ -37,20 +37,38 @@ class ETDynamicPrompt:
         if gen_type == "combinatorial":
             generator = CombinatorialPromptGenerator()
 
+            random.seed(seed)
+            offset = 0
+            combination_count = None
+
             for i in range(count):
                 prompts += generator.generate(text)
+                offset = i * count
+
+                if combination_count == None:
+                    combination_count = len(prompts)
+
+                seeds += self.get_seeds(seed_type, seed, combination_count, offset)
+
+                # Increase seeds for subsequent prompt collections,
+                # so each "batch" gets its own seed and differs from
+                # the previous ones. Otherwise, we'd just get the same
+                # set over and over.
+                if seed_type == "fixed": seed += 1
+                elif seed_type == "sequential": seed += i * count
         else:
             generator = RandomPromptGenerator()
+
             prompts = generator.generate(text, num_images=count)
+            seeds = self.get_seeds(seed_type, seed, count, 0)
 
-        prompt_count = len(prompts)
+        return (prompts, seeds, len(prompts),)
 
+    def get_seeds(seed_type, base_seed, count):
         if seed_type == "fixed":
-            seeds = [seed] * prompt_count
+            return [base_seed] * count
         elif seed_type == "sequential":
-            seeds = [seed + i for i in range(prompt_count)]
+            return [base_seed + i for i in range(count)]
         else:
-            random.seed(seed)
-            seeds = [random.randint(0, 2000000000) for i in range(prompt_count)]
-
-        return (prompts, seeds, prompt_count,)
+            random.seed(base_seed)
+            return [random.randint(0, 2000000000) for i in range(count)]
