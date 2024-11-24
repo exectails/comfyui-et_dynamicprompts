@@ -33,17 +33,21 @@ class ETDynamicPrompt:
 
         if gen_type == "combinatorial":
             generator = CombinatorialPromptGenerator()
-            prompts = generator.generate(text)
+
+            for i in range(count):
+                prompts += generator.generate(text)
         else:
             generator = RandomPromptGenerator()
             prompts = generator.generate(text, num_images=count)
 
+        prompt_count = len(prompts)
+
         if seed_type == "fixed":
-            seeds = [seed] * len(prompts)
+            seeds = [seed] * prompt_count
         elif seed_type == "sequential":
-            seeds = [seed + i for i in range(len(prompts))]
+            seeds = [seed + i for i in range(prompt_count)]
         else:
             random.seed(seed)
-            seeds = [random.randint(0, 2000000000) for i in range(len(prompts))]
+            seeds = [random.randint(0, 2000000000) for i in range(prompt_count)]
 
-        return (prompts, seeds, len(prompts),)
+        return (prompts, seeds, prompt_count,)
