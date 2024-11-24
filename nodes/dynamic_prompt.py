@@ -11,7 +11,7 @@ class ETDynamicPrompt:
         return {
             "required": {
                 "text": ("STRING", {"default": "", "multiline": True, "tooltip": "The text to generate prompts from."}),
-                "count": ("INT", {"default": 1, "tooltip": "Number of prompts to generate for non-combinatorial prompts."}),
+                "count": ("INT", {"default": 1, "min": 1, "max": 2000000000, "tooltip": "Number of prompts to generate for non-combinatorial prompts."}),
                 "gen_type": (["random", "combinatorial"], {"default": "random", "tooltip": "Determines the type of prompt generation to use. Combinatorial returns all possible combinations, while random returns random combinations."}),
                 "seed_type": (["fixed", "sequential", "random"], {"default": "random", "tooltip": "Determines how returned seeds are generated. Fixed uses the set seed for all generations, sequential seeds start at the set seed, and random seeds are random for each prompt, seeded by the set seed."}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2000000000, "tooltip": "The seed to use for generating images. Plug returned seed(s) into sampler."}),
@@ -30,6 +30,9 @@ class ETDynamicPrompt:
 
         prompts = []
         seeds = []
+
+        if count < 1:
+            count = 1
 
         if gen_type == "combinatorial":
             generator = CombinatorialPromptGenerator()
