@@ -22,7 +22,7 @@ class ETDynamicPrompt:
     RETURN_NAMES = ("text", "seed", "count",)
     OUTPUT_IS_LIST = (True, True, False,)
 
-    CATEGORY = "exectails"
+    CATEGORY = "exectails/Dynamic"
     FUNCTION = "process"
 
     def process(self, text: str, count: int, gen_type: str, seed_type: str, seed: int) -> tuple:
