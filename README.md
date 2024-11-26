@@ -9,6 +9,23 @@ the same way, and unlike the semi-official dynamic prompts nodes, the ones
 in this repo are a little easier to utilize and allow the automatic
 generation of all possible combinations without manual queuing.
 
+Install
+-----------------------------------------------------------------------------
+
+**Option 1**
+
+Install via [ComfyUI-Manager][2].
+
+**Option 2**
+
+Clone the repository into your ComfyUI custom_nodes directory and
+install the requirements in your ComfyUI Python environment.
+```text
+git clone https://github.com/exectails/comfyui-et_dynamicprompts
+cd comfyui-et_dynamicprompts
+pip install -r requirements.txt
+```
+
 Nodes
 -----------------------------------------------------------------------------
 
@@ -131,3 +148,4 @@ but less deterministic from the outside.
 
 
 [1]: https://github.com/adieyal/dynamicprompts
+[2]: https://github.com/ltdrdata/ComfyUI-Manager
