@@ -52,7 +52,7 @@ class ETDynamicPrompt:
                 # so each "batch" gets its own seed and differs from
                 # the previous ones. Otherwise, we'd just get the same
                 # set over and over.
-                if seed_type == "sequential": seed += i * count
+                if seed_type == "sequential": seed += combination_count
                 else: seed += 1
         else:
             generator = RandomPromptGenerator()
