@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-et_dynamicprompts"
+description = "Nodes that implement functionality similar to the Dynamic Prompts extension for A1111."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["dynamicprompts==0.30.2"]
+
+[project.urls]
+Repository = "https://github.com/exectails/comfyui-et_dynamicprompts"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "comfyui-et_dynamicprompts"
+Icon = ""
